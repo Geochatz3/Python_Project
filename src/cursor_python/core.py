@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import math
 import random
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
-from typing import Iterable, Sequence
 
 
 @dataclass(frozen=True, slots=True)
@@ -54,7 +54,10 @@ def format_circle_stats(circles: Iterable[Circle]) -> str:
     lines: list[str] = []
     for idx, circle in enumerate(circles, 1):
         lines.append(
-            f"{idx:02d}. {circle}: area={circle.area():.2f}, circumference={circle.circumference():.2f}"
+            (
+                f"{idx:02d}. {circle}: area={circle.area():.2f}, "
+                f"circumference={circle.circumference():.2f}"
+            )
         )
     return "\n".join(lines)
 

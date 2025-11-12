@@ -5,9 +5,10 @@ import json
 import logging
 import sys
 import time
+from collections.abc import Sequence
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any, Sequence
+from typing import Any
 
 from .config import (
     Settings,
@@ -141,7 +142,10 @@ def configure_logging(level: str, log_format: str) -> None:
     else:
         formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 
-    has_stream_handler = any(isinstance(handler, logging.StreamHandler) for handler in root_logger.handlers)
+    has_stream_handler = any(
+        isinstance(handler, logging.StreamHandler)
+        for handler in root_logger.handlers
+    )
     if not has_stream_handler:
         root_logger.addHandler(logging.StreamHandler())
 

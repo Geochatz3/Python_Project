@@ -7,7 +7,14 @@ from pathlib import Path
 
 import pytest
 
-from cursor_python import Circle, Settings, format_circle_stats, generate_random_circles, main, run_demo
+from cursor_python import (
+    Circle,
+    Settings,
+    format_circle_stats,
+    generate_random_circles,
+    main,
+    run_demo,
+)
 
 
 def test_circle_area_and_circumference() -> None:
@@ -57,7 +64,17 @@ def test_main_invocation_success(monkeypatch, caplog) -> None:
     caplog.set_level("INFO")
     monkeypatch.setattr(
         "sys.argv",
-        ["cursor-python", "--count", "2", "--seed", "1", "--min-radius", "1.0", "--max-radius", "1.0"],
+        [
+            "cursor-python",
+            "--count",
+            "2",
+            "--seed",
+            "1",
+            "--min-radius",
+            "1.0",
+            "--max-radius",
+            "1.0",
+        ],
     )
     exit_code = main()
     assert exit_code == 0
