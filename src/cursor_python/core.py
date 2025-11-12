@@ -54,10 +54,8 @@ def format_circle_stats(circles: Iterable[Circle]) -> str:
     lines: list[str] = []
     for idx, circle in enumerate(circles, 1):
         lines.append(
-            (
-                f"{idx:02d}. {circle}: area={circle.area():.2f}, "
-                f"circumference={circle.circumference():.2f}"
-            )
+            f"{idx:02d}. {circle}: area={circle.area():.2f}, "
+            f"circumference={circle.circumference():.2f}"
         )
     return "\n".join(lines)
 
