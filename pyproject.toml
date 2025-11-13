@@ -13,11 +13,16 @@ authors = [{ name = "G. Chatzitsompanis" }]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries",
     "Topic :: Documentation",
+    "Development Status :: 4 - Beta",
 ]
+keywords = ["cli", "geometry", "circles", "demo", "example"]
 dependencies = [
     'tomli; python_version < "3.11"',
 ]
@@ -25,14 +30,22 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
     "sphinx>=8.1.0",
     "ruff>=0.7.0",
     "mypy>=1.11.0",
     "black>=24.8.0",
+    "pre-commit>=3.6.0",
 ]
 docs = [
     "sphinx>=8.1.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/Geochatz3/Python_Project"
+Documentation = "https://github.com/Geochatz3/Python_Project#readme"
+Repository = "https://github.com/Geochatz3/Python_Project"
+Issues = "https://github.com/Geochatz3/Python_Project/issues"
 
 [project.scripts]
 cursor-python = "cursor_python.cli:console_main"
@@ -44,8 +57,24 @@ package-dir = { "" = "src" }
 where = ["src"]
 
 [tool.pytest.ini_options]
-addopts = "-ra"
+addopts = "-ra --cov=src/cursor_python --cov-report=term-missing --cov-report=html"
 testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*", "*/test_*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
 
 [tool.black]
 line-length = 100
@@ -66,4 +95,3 @@ strict = true
 warn_unused_configs = true
 exclude = "docs/_build"
 pretty = true
-
